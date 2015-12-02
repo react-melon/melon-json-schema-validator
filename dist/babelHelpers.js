@@ -1,4 +1,4 @@
-define('melon-json-schema-form/babelHelper', [
+define('melon-json-schema-validator/babelHelpers', [
     'require',
     'exports',
     'module'

@@ -22,7 +22,7 @@ exports.getProcessors = function () {
     var lessProcessor = new LessCompiler();
     var cssProcessor = new CssCompressor();
     var moduleProcessor = new ModuleCompiler({
-        bizId: 'melon-json-schema-form'
+        bizId: 'melon-json-schema-validator'
     });
     var jsProcessor = new JsCompressor();
     var pathMapperProcessor = new PathMapper();

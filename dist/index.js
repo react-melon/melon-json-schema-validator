@@ -1,4 +1,4 @@
-define('melon-json-schema-form/index', [
+define('melon-json-schema-validator/index', [
     'require',
     'exports',
     'module',
