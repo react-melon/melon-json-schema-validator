@@ -9,6 +9,9 @@
 exports.port = 8848;
 exports.directoryIndexes = true;
 exports.documentRoot = __dirname;
+
+var babel = require('babel-core');
+
 exports.getLocations = function () {
     return [
         {
@@ -49,6 +52,45 @@ exports.getLocations = function () {
             handler: [
                 file(),
                 stylus()
+            ]
+        },
+        {
+            location: function (context) {
+                return /^\/(src|example).*?\.js($|\?)/.test(context.url);
+            },
+            handler: [
+                file(),
+                function (context) {
+                    try {
+                        context.content = babel
+                            .transform(
+                                context.content,
+                                {
+                                    compact: false,
+                                    ast: false,
+                                    presets: [
+                                        'es2015',
+                                        'react'
+                                    ],
+                                    plugins: [
+                                        'external-helpers-2',
+                                        'transform-object-rest-spread'
+                                    ]
+                                }
+                            )
+                            .code;
+                    }
+                    catch (e) {
+                        console.error(e.stack);
+                        context.status = 500;
+                    }
+                },
+                function amdify(context) {
+                    context.content =  ''
+                        + 'define(function (require, exports, module) {\n'
+                        +     context.content
+                        + '\n});';
+                }
             ]
         },
         {

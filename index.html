@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>melon-json-schema-validator</title>
+</head>
+<body>
+hello, edp project~!
+<script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/2-0-8/esl.js"></script>
+<script>
+require.config({
+    baseUrl: './src',
+    paths: {
+        'react': '../dep/react/react',
+        'react-motion': '../dep/react-motion/build/react-motion',
+        'react-dom': '../dep/react/react-dom',
+        'underscore': '../dep/underscore/underscore',
+        'es5-shim': '../dep/es5-shim/es5-shim',
+        'melon': '../dep/melon/dist',
+        'numen': '../dep/numen/dist',
+        'es6-promise': '../dep/es6-promise/promise'
+    }
+});
+require(['index'], function (index) {
+    index.init();
+});
+</script>
+
+</body>
+</html>

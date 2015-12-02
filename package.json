@@ -1,7 +1,7 @@
 {
   "name": "melon-json-schema-validator",
   "version": "0.1.0",
-  "description": "melon json scehma validator",
+  "description": "melon json schema validator",
   "main": "src/main.js",
   "scripts": {
     "lint": "fecs src",
