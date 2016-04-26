@@ -3,62 +3,62 @@
  * @author ludafa(ludafa@outlook.com)
  */
 
-const Validity = require('melon/validator/Validity');
-const tv4 = require('tv4');
+import Validity from 'melon/validator/Validity';
+import tv4 from 'tv4';
 
-function JsonSchemaValidator() {
+export class Validator {
+
+    resolveSchema(component) {
+        return component.props.rules || {};
+    }
+
+    validate(value, component) {
+
+        const {errors = []} = tv4.validateMultiple(
+            value,
+            this.resolveSchema(component)
+        );
+
+        const validity = errors.reduce(
+            (validity, error) => {
+
+                const {valid, ...rest} = error;
+
+                validity.addState({
+                    ...rest,
+                    isValid: valid
+                });
+
+                return validity;
+
+            },
+            new Validity()
+        );
+
+        return validity;
+    }
+
+    createCustomValidity(customValidity) {
+
+        const validity = new Validity();
+
+        validity.addState({
+            isValid: !!customValidity,
+            message: customValidity
+        });
+
+        return validity;
+
+    }
+
 }
 
-JsonSchemaValidator.prototype.resolveSchema = function (component) {
-    return component.props.rules || {};
+const validator = new Validator();
+
+validator.Validator = Validator;
+validator.create = function () {
+    return new Validator();
 };
 
-JsonSchemaValidator.prototype.validate = function (value, component) {
-
-    const {errors = []} = tv4.validateMultiple(
-        value,
-        this.resolveSchema(component)
-    );
-
-    const validity = errors.reduce(
-        (validity, error) => {
-
-            const {valid, ...rest} = error;
-
-            validity.addState({
-                ...rest,
-                isValid: valid
-            });
-
-            return validity;
-
-        },
-        new Validity()
-    );
-
-    return validity;
-};
-
-JsonSchemaValidator.prototype.createCustomValidity = function (customValidity) {
-
-    const validity = new Validity();
-
-    validity.addState({
-        isValid: !!customValidity,
-        message: customValidity
-    });
-
-    return validity;
-
-};
-
-const defaultValidator = new JsonSchemaValidator();
-
-defaultValidator.Validator = JsonSchemaValidator;
-defaultValidator.create = function () {
-    return new JsonSchemaValidator();
-};
-
-module.exports = defaultValidator;
-
-
+/* eslint-disable fecs-export-on-declare */
+export default validator;

@@ -43,6 +43,7 @@ exports.getProcessors = function () {
             ],
             plugins: [
                 'external-helpers-2',
+                'transform-es2015-modules-umd',
                 'transform-object-rest-spread'
             ]
         }
@@ -51,8 +52,8 @@ exports.getProcessors = function () {
     return {
         amd: [
             babel,
-            amdWrapper,
-            moduleProcessor,
+            // amdWrapper,
+            // moduleProcessor,
             pathMapperProcessor
         ],
         release: [
