@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "melon": "~0.1.1",
+    "melon": "~0.2",
     "tv4": "~1.2.7"
   }
 }
