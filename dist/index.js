@@ -1,30 +1,31 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['exports', 'melon/validator/Validity', 'tv4', "./babelHelpers"], factory);
+        define(['exports', 'melon/validator/Validity', 'ajv', "./babelHelpers"], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('melon/validator/Validity'), require('tv4'), require("./babelHelpers"));
+        factory(exports, require('melon/validator/Validity'), require('ajv'), require("./babelHelpers"));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.Validity, global.tv4, global.babelHelpers);
+        factory(mod.exports, global.Validity, global.ajv, global.babelHelpers);
         global.index = mod.exports;
     }
-})(this, function (exports, _Validity, _tv, babelHelpers) {
+})(this, function (exports, _Validity, _ajv, babelHelpers) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.Validator = undefined;
 
     var _Validity2 = babelHelpers.interopRequireDefault(_Validity);
 
-    var _tv2 = babelHelpers.interopRequireDefault(_tv);
+    var _ajv2 = babelHelpers.interopRequireDefault(_ajv);
 
-    var Validator = exports.Validator = function () {
-        function Validator() {
+    var Validator = function () {
+        function Validator(options) {
             babelHelpers.classCallCheck(this, Validator);
+
+            this.validator = new _ajv2.default(options);
         }
 
         babelHelpers.createClass(Validator, [{
@@ -35,25 +36,21 @@
         }, {
             key: 'validate',
             value: function validate(value, component) {
-                var _tv4$validateMultiple = _tv2.default.validateMultiple(value, this.resolveSchema(component));
 
-                var _tv4$validateMultiple2 = _tv4$validateMultiple.errors;
-                var errors = _tv4$validateMultiple2 === undefined ? [] : _tv4$validateMultiple2;
+                var validator = this.validator;
 
+                var valid = validator.validate(this.resolveSchema(component), value);
 
-                var validity = errors.reduce(function (validity, error) {
-                    var valid = error.valid;
-                    var rest = babelHelpers.objectWithoutProperties(error, ['valid']);
+                var validity = new _Validity2.default();
 
+                return valid ? validity : validator.errors.reduce(function (validity, error) {
 
-                    validity.addState(babelHelpers.extends({}, rest, {
-                        isValid: valid
+                    validity.addState(babelHelpers.extends({}, error, {
+                        isValid: false
                     }));
 
                     return validity;
-                }, new _Validity2.default());
-
-                return validity;
+                }, validity);
             }
         }, {
             key: 'createCustomValidity',
@@ -72,13 +69,5 @@
         return Validator;
     }();
 
-    var validator = new Validator();
-
-    validator.Validator = Validator;
-    validator.create = function () {
-        return new Validator();
-    };
-
-    /* eslint-disable fecs-export-on-declare */
-    exports.default = validator;
+    exports.default = Validator;
 });

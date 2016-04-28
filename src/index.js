@@ -4,9 +4,13 @@
  */
 
 import Validity from 'melon/validator/Validity';
-import tv4 from 'tv4';
+import Ajv from 'ajv';
 
-export class Validator {
+export default class Validator {
+
+    constructor(options) {
+        this.validator = new Ajv(options);
+    }
 
     resolveSchema(component) {
         return component.props.rules || {};
@@ -14,28 +18,28 @@ export class Validator {
 
     validate(value, component) {
 
-        const {errors = []} = tv4.validateMultiple(
-            value,
-            this.resolveSchema(component)
-        );
+        const validator = this.validator;
 
-        const validity = errors.reduce(
-            (validity, error) => {
+        const valid = validator.validate(this.resolveSchema(component), value);
 
-                const {valid, ...rest} = error;
+        const validity = new Validity();
 
-                validity.addState({
-                    ...rest,
-                    isValid: valid
-                });
+        return valid
+            ? validity
+            : validator
+                .errors
+                .reduce(function (validity, error) {
 
-                return validity;
+                    validity.addState({
+                        ...error,
+                        isValid: false
+                    });
 
-            },
-            new Validity()
-        );
+                    return validity;
 
-        return validity;
+                }, validity);
+
+
     }
 
     createCustomValidity(customValidity) {
@@ -52,13 +56,3 @@ export class Validator {
     }
 
 }
-
-const validator = new Validator();
-
-validator.Validator = Validator;
-validator.create = function () {
-    return new Validator();
-};
-
-/* eslint-disable fecs-export-on-declare */
-export default validator;
