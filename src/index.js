@@ -13,7 +13,8 @@ export default class Validator {
     }
 
     resolveSchema(component) {
-        return component.props.rules || {};
+        const {rules, schema} = component.props;
+        return rules || schema || {};
     }
 
     validate(value, component) {
@@ -47,7 +48,7 @@ export default class Validator {
         const validity = new Validity();
 
         validity.addState({
-            isValid: !!customValidity,
+            isValid: !customValidity,
             message: customValidity
         });
 

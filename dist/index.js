@@ -31,7 +31,11 @@
         babelHelpers.createClass(Validator, [{
             key: 'resolveSchema',
             value: function resolveSchema(component) {
-                return component.props.rules || {};
+                var _component$props = component.props;
+                var rules = _component$props.rules;
+                var schema = _component$props.schema;
+
+                return rules || schema || {};
             }
         }, {
             key: 'validate',
@@ -59,7 +63,7 @@
                 var validity = new _Validity2.default();
 
                 validity.addState({
-                    isValid: !!customValidity,
+                    isValid: !customValidity,
                     message: customValidity
                 });
 
