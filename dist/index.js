@@ -1,3 +1,4 @@
+/*! 2016 Baidu Inc. All Rights Reserved */
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
         define(['exports', 'melon/validator/Validity', 'ajv', "./babelHelpers"], factory);

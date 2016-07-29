@@ -1,11 +1,12 @@
 {
   "name": "melon-json-schema-validator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "melon json schema validator",
   "main": "src/main.js",
   "scripts": {
     "lint": "fecs src",
-    "build:amd": "sh tool/build-amd.sh"
+    "build": "sh tool/build.sh",
+    "release": "sh tool/release.sh"
   },
   "author": {
     "name": "ludafa",
@@ -18,6 +19,9 @@
     "loaderAutoConfig": "js,htm,html,tpl,vm,phtml",
     "loaderUrl": "http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js",
     "dependencies": {}
+  },
+  "peerDependencies": {
+    "melon": "0.2.x"
   },
   "license": "MIT",
   "directories": {
@@ -33,5 +37,9 @@
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-es2015-loose": "^7.0.0",
     "babel-preset-react": "^6.1.18"
+  },
+  "dependencies": {
+    "ajv": "^4.3.0",
+    "melon": "^0.2.5"
   }
 }

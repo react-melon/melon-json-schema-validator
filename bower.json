@@ -1,6 +1,6 @@
 {
   "name": "melon-json-schema-validator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "melon json schema validator",
   "main": "src/main.js",
   "license": "MIT",

@@ -28,10 +28,6 @@ exports.getProcessors = function () {
     var pathMapperProcessor = new PathMapper();
     var addCopyright = new AddCopyright();
 
-    var amdWrapper = new AmdWrapper({
-        files: ['src/**/*.js']
-    });
-
     var babel = new BabelProcessor({
         files: ['src/**/*.js'],
         compileOptions: {
@@ -50,11 +46,10 @@ exports.getProcessors = function () {
     });
 
     return {
-        amd: [
+        default: [
             babel,
-            // amdWrapper,
-            // moduleProcessor,
-            pathMapperProcessor
+            pathMapperProcessor,
+            addCopyright
         ],
         release: [
             lessProcessor, cssProcessor, moduleProcessor,
@@ -104,5 +99,4 @@ exports.injectProcessor = function (processors) {
         global[key] = processors[key];
     }
     global.BabelProcessor = require('./tool/BabelProcessor.js');
-    global.AmdWrapper = require('./tool/AmdWrapper.js');
 };
