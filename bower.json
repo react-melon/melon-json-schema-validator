@@ -1,6 +1,6 @@
 {
   "name": "melon-json-schema-validator",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "melon json schema validator",
   "main": "src/main.js",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "melon": "~0.2",
-    "ajv.bundle": "https://cdnjs.cloudflare.com/ajax/libs/ajv/4.0.6/ajv.bundle.js"
+    "ajv.bundle": "https://cdnjs.cloudflare.com/ajax/libs/ajv/4.0.6/ajv.bundle.js",
+    "melon-core": "^0.3.2"
   }
 }

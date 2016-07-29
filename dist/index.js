@@ -1,9 +1,9 @@
 /*! 2016 Baidu Inc. All Rights Reserved */
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['exports', 'melon/validator/Validity', 'ajv', "./babelHelpers"], factory);
+        define(['exports', 'melon-core/validator/Validity', 'ajv', "./babelHelpers"], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('melon/validator/Validity'), require('ajv'), require("./babelHelpers"));
+        factory(exports, require('melon-core/validator/Validity'), require('ajv'), require("./babelHelpers"));
     } else {
         var mod = {
             exports: {}

@@ -3,7 +3,7 @@
  * @author ludafa(ludafa@outlook.com)
  */
 
-import Validity from 'melon/validator/Validity';
+import Validity from 'melon-core/validator/Validity';
 import Ajv from 'ajv';
 
 export default class Validator {
