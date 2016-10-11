@@ -13,7 +13,8 @@
     "node_modules",
     "dep",
     "test",
-    "tests"
+    "tests",
+    "src"
   ],
   "dependencies": {
     "melon": "~0.2",
