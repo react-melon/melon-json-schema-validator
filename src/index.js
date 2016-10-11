@@ -3,8 +3,9 @@
  * @author ludafa(ludafa@outlook.com)
  */
 
-import Validity from 'melon/validator/Validity';
+import Validity from 'melon-core/validator/Validity';
 import Ajv from 'ajv';
+import locale from './locale/zh-CN';
 
 export default class Validator {
 
@@ -25,21 +26,22 @@ export default class Validator {
 
         const validity = new Validity();
 
-        return valid
-            ? validity
-            : validator
-                .errors
-                .reduce(function (validity, error) {
+        if (valid) {
+            return validity;
+        }
 
-                    validity.addState({
-                        ...error,
-                        isValid: false
-                    });
+        locale(validator.errors);
 
-                    return validity;
-
-                }, validity);
-
+        return validator.errors.reduce(
+            (validity, error) => {
+                validity.addState({
+                    ...error,
+                    isValid: false
+                });
+                return validity;
+            },
+            validity
+        );
 
     }
 
