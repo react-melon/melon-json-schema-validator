@@ -58,4 +58,38 @@ export default class Validator {
 
     }
 
+    // delegated methods from ajv validator
+
+    addFormat(...args) {
+        this.validator.addFormat(...args);
+    }
+
+    addKeyword(...args) {
+        this.validator.addKeyword(...args);
+    }
+
+    getSchema(...args) {
+        this.getSchema(...args);
+    }
+
+    validateSchema(...args) {
+        this.validateSchema(...args);
+    }
+
+    addMetaSchema(...args) {
+        this.addMetaSchema(...args);
+    }
+
+    addSchema(...args) {
+        this.addSchema(...args);
+    }
+
+    removeSchema(...args) {
+        this.removeSchema(...args);
+    }
+
+    errorsText(...args) {
+        this.errorsText(...args);
+    }
+
 }
