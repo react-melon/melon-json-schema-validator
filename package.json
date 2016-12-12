@@ -1,6 +1,6 @@
 {
   "name": "melon-json-schema-validator",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "melon json schema validator",
   "main": "lib/index.js",
   "scripts": {
@@ -69,6 +69,8 @@
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
     "rimraf": "^2.5.4",
     "watchify": "^3.7.0",
     "webpack": "^1.13.1",
@@ -76,8 +78,8 @@
     "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
-    "ajv": "^4.7.7",
-    "melon-core": "^0.3.4"
+    "ajv": "~4.9.0",
+    "melon-core": "^0.4.1"
   },
   "babel": {
     "presets": [
